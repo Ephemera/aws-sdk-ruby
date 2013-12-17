@@ -12,6 +12,9 @@
 # language governing permissions and limitations under the License.
 
 require 'pathname'
+require 'rack'
+require 'rexml/document'
+include REXML
 
 module AWS
   module Core
@@ -213,6 +216,10 @@ module AWS
         response.http_request.body
       end
 
+      def _http_request_body_email response
+        Rack::Utils.parse_nested_query(response.http_request.body)['Destination.ToAddresses.member.1'] or response.http_request.body 
+      end
+
       def _http_request_proxy_uri response
         response.config.proxy_uri
       end
@@ -227,6 +234,10 @@ module AWS
 
       def _http_response_body response
         response.http_response.body
+      end
+
+      def _http_response_body_messageid response
+        Document.new(response.http_response.body).elements['SendEmailResponse/SendEmailResult/MessageId'][0] or response.http_response.body
       end
 
       # The following methods are for summarizing request options that have
