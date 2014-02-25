@@ -19,6 +19,8 @@ module AWS
 
       API_VERSION = '2011-06-15'
 
+      signature_version :Version4, 'sts'
+
       REGION_US_E1 = 'sts.amazonaws.com'
 
       # @api private
@@ -31,6 +33,15 @@ module AWS
             ':use_ssl option is set to false.  Try passing :use_ssl => true'
           raise ArgumentError, msg
         end
+      end
+
+      # Two STS operations are un-signed
+      alias do_sign_request sign_request
+      def sign_request(req)
+        action = req.params.find { |param| param.name == 'Action' }.value
+        unsigned = %w( AssumeRoleWithWebIdentity AssumeRoleWithSAML )
+        do_sign_request(req) unless unsigned.include?(action)
+        req
       end
 
     end

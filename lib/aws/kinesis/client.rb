@@ -17,16 +17,18 @@ module AWS
     # Client class for Amazon Kinesis.
     class Client < Core::JSONClient
 
-      API_VERSION = '2013-11-04'
+      API_VERSION = '2013-12-02'
+
+      signature_version :Version4, 'kinesis'
 
       # @api private
       CACHEABLE_REQUESTS = Set[]
 
     end
 
-    class Client::V20131104 < Client
+    class Client::V20131202 < Client
 
-      define_client_methods('2013-11-04')
+      define_client_methods('2013-12-02')
 
     end
   end

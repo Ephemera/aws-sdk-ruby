@@ -93,15 +93,18 @@ The SDK currently supports the following services:
       <td>AWS CloudFormation</td>
     </tr>
     <tr>
-      <td rowspan="3">AWS::CloudFront</td>
+      <td rowspan="4">AWS::CloudFront</td>
       <td>2013-05-12</td>
-      <td rowspan="3">Amazon CloudFront</td>
+      <td rowspan="4">Amazon CloudFront</td>
     </tr>
     <tr>
       <td>2013-08-26</td>
     </tr>
     <tr>
       <td>2013-09-27</td>
+    </tr>
+    <tr>
+      <td>2013-11-11</td>
     </tr>
     <tr>
       <td>AWS::CloudSearch</td>
@@ -137,12 +140,15 @@ The SDK currently supports the following services:
       <td>2012-08-10</td>
     </tr>
     <tr>
-      <td rowspan="2">AWS::EC2</td>
+      <td rowspan="3">AWS::EC2</td>
       <td>2013-08-15</td>
-      <td rowspan="2">Amazon Elastic Compute Cloud</td>
+      <td rowspan="3">Amazon Elastic Compute Cloud</td>
     </tr>
     <tr>
       <td>2013-10-01</td>
+    </tr>
+    <tr>
+      <td>2013-10-15</td>
     </tr>
     <tr>
       <td>AWS::ElastiCache</td>
@@ -183,6 +189,11 @@ The SDK currently supports the following services:
       <td>AWS::ImportExport</td>
       <td>2010-06-01</td>
       <td>AWS Import/Export</td>
+    </tr>
+    <tr>
+      <td>AWS::Kinesis</td>
+      <td>2013-12-02</td>
+      <td>Amazon Kinesis</td>
     </tr>
     <tr>
       <td>AWS::OpsWorks</td>

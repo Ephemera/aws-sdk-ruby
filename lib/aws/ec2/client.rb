@@ -19,6 +19,18 @@ module AWS
 
       API_VERSION = '2013-10-15'
 
+      def sign_request request
+        version = @config.ec2_signature_version ?
+          @config.ec2_signature_version.to_sym :
+          (@region =~ /cn-/ ? :v4 : :v2)
+        case version
+        when :v4 then v4_signer.sign_request(request)
+        when :v2 then v2_signer.sign_request(request)
+        else
+          raise "invalid signature version #{version.inspect}"
+        end
+      end
+
       # @api private
       CACHEABLE_REQUESTS = Set[
         :describe_addresses,
@@ -57,6 +69,19 @@ module AWS
         :describe_network_interfaces,
         :describe_network_interface_attribute,
       ]
+
+      protected
+
+      # @return [Core::Signers::Version2]
+      def v2_signer
+        @v2_signer ||= Core::Signers::Version2.new(credential_provider)
+      end
+
+      # @return [Core::Signers::Version4]
+      def v4_signer
+        @v4_signer ||=
+          Core::Signers::Version4.new(credential_provider, 'ec2', @region)
+      end
 
     end
 
